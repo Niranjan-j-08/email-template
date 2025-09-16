@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unsubscribe</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .unsubscribe-box { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 400px; }
+    h2 { margin-bottom: 15px; color: #333; }
+    textarea, select, button { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+    button { background: #d9534f; color: #fff; border: none; cursor: pointer; }
+    button:hover { background: #c9302c; }
+  </style>
+</head>
+<body>
+  <div class="unsubscribe-box">
+    <h2>Unsubscribe</h2>
+    <p>We're sorry to see you go. Please let us know why you're unsubscribing:</p>
+    
+    <form action="http://localhost:5678/webhook/bc4f29fc-194e-4015-8f03-f178ec97fabc" method="POST">
+      <input type="hidden" id="email" name="email" value="">
+      <label for="reason">Reason:</label>
+      <select name="reason" id="reason" required>
+        <option value="">-- Select a reason --</option>
+        <option value="too_many_emails">I receive too many emails</option>
+        <option value="not_relevant">Content is not relevant to me</option>
+        <option value="prefer_other_channel">I prefer updates on WhatsApp/SMS</option>
+        <option value="other">Other</option>
+      </select>
+      <label for="comments">Additional Comments (optional):</label>
+      <textarea name="comments" id="comments" rows="4" placeholder="Type here..."></textarea>
+      <button type="submit">Submit & Unsubscribe</button>
+    </form>
+  </div>
+  <script>
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const email = urlParams.get('email');
+      if (email) {
+        document.getElementById('email').value = email;
+      }
+    };
+  </script>
+</body>
+</html>
